@@ -1,5 +1,5 @@
 ## TODO
-- [ ] List stations
-- [ ] Sort stations based on geolocation
+- [x] List stations
 - [ ] Departure times
+- [ ] Sort stations based on geolocation
 - [ ] Analytics
