@@ -1,4 +1,7 @@
-const STATION_SELECTED='nxtbrt/station/selected';
+import * as BartGateway from '../bartGateway';
+
+const STATION_SELECTED='nxtbrt/station/STATION_SELECTED';
+const ETDS_AVAILABLE='nxtbrt/station/ETDS_AVAILABLE';
 
 export default function reducer(state={},action={}) {
   switch(action.type){
@@ -13,9 +16,28 @@ export default function reducer(state={},action={}) {
   }
 }
 
-export function selectStations(station) {
+function stationSelected(station) {
   return {
     type: STATION_SELECTED,
-    station: station
+    station
+  };
+}
+
+function etdsAvailable(station,etds) {
+  return {
+    type: ETDS_AVAILABLE,
+    station,
+    etds
+  };
+}
+
+export function selectStations(station) {
+  return function(dispatch){
+    dispatch( stationSelected(station) );
+
+    return BartGateway.fetchEtds(station)
+    .then(function (etds) {
+      dispatch( etdsAvailable(station,etds) );
+    });
   };
 }
