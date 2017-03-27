@@ -1,15 +1,17 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router-dom';
 
-export default function Station({station,onSelected}){
+export default function Station({station}){
   return (
-    <li className="station-list__station" onClick={()=>onSelected(station)}>
-      {station.name}
-    </li>
+    <Link to={`/s/${station.abbr}`}>
+      <li className="station-list__station">
+        {station.name}
+      </li>
+    </Link>
   );
 }
 
 Station.propTypes = {
-  station: PropTypes.object.isRequired,
-  onSelected: PropTypes.func.isRequired
+  station: PropTypes.object.isRequired
 }
 
