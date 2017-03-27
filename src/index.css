@@ -30,3 +30,68 @@ ul {
 .station-list__station:hover {
   text-shadow: 0px 0px 6px rgba(5,5,5,0.3);
 }
+
+.station-screen {
+  display: flex;
+  flex-direction:column;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.station-screen__title {
+  font-size: 1.4em;
+  text-align: center;
+}
+.station-screen__body {
+  flex-grow: 1;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+}
+
+.etds-list {
+  width: 100%;
+}
+
+.etds-list__etd {
+  font-size: 20pt;
+
+  padding: 0.5em 0;
+  text-align: center;
+  border-top: 1pt solid black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.etds-list__etd.-line-red { background-color: #e11a57;  }
+.etds-list__etd.-line-orange { background-color: #f9a11d; }
+.etds-list__etd.-line-yellow { background-color: #fdf057; }
+.etds-list__etd.-line-green { background-color: #4fb848; }
+.etds-list__etd.-line-blue { background-color: #2aabe2; }
+
+
+/* loading animation courtesy of: https://stephanwagner.me/only-css-loading-spinner */
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+.loading__spinner {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  margin-top:50px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top-color: #07d;
+  border-bottom-color: #07d;
+  animation: spinner 1.5s ease infinite;
+}
