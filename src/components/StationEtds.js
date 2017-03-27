@@ -22,10 +22,8 @@ export default class StationEtds extends Component{
   render(){
     return (
       <section className="station-screen">
-        <Link to="/">
-          <h1 className="station-screen__title">
-            {this.props.station.name}
-          </h1>
+        <Link to="/" className="station-screen__title">
+          {this.props.station.name}
         </Link>
         <div className="station-screen__body">
           <Body etds={this.state.etds}/>
