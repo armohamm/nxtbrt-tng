@@ -1,9 +1,8 @@
 import React, {PropTypes} from 'react';
 
 import Station from './Station';
-import STATIONS from '../stations_data';
 
-export default function Stations({stations=STATIONS}){
+export default function Stations({stations}){
   const listItems = stations.map( (station,ix) => <Station key={ix} station={station} /> );
   return (
     <ul className="station-list">
@@ -13,6 +12,6 @@ export default function Stations({stations=STATIONS}){
 }
 
 Stations.propTypes = {
-  stations: PropTypes.array
+  stations: PropTypes.array.isRequired
 }
 
