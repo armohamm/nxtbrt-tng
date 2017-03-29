@@ -7,5 +7,6 @@ export function allStations(){
 }
 
 export function stationByAbbr(targetAbbr){
+  targetAbbr = targetAbbr.toUpperCase();
   return STATIONS.find( (station)=> station.abbr === targetAbbr );
 }
