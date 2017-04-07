@@ -3,13 +3,16 @@ import querystring from 'querystring';
 import fetchMock from 'fetch-mock';
 import {fetchEtds} from '../../src/lib/bartGateway';
 
+import {ETD_RESPONSE} from '../fixtures';
+
 describe('bartGateway', function () {
+
   afterEach(function () {
     fetchMock.restore();
   });
 
   test('fetches from the correct URL', function () {
-    fetchMock.get('*',genericXmlResponse());
+    fetchMock.get('*',ETD_RESPONSE);
 
     const fakeStation = {
       abbr: 'some-abbr' 
@@ -29,7 +32,17 @@ describe('bartGateway', function () {
     });
   });
 
-  function genericXmlResponse() {
-    return '<xml>blah</xml>';
-  }
+  test('parses an XML response into a set of stations, sorted by etd', function () {
+    fetchMock.get('*',ETD_RESPONSE);
+    
+    return fetchEtds({abbr:'blah'})
+    .then(function (etds) {
+      expect(etds).toBeInstanceOf(Array);
+
+      const firstEtd = etds[0];
+      expect(firstEtd).toHaveProperty('minutes',4);
+      expect(firstEtd).toHaveProperty('lineColor','red');
+      expect(firstEtd).toHaveProperty('dest.abbr','RICH');
+    });
+  });
 });
