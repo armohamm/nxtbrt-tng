@@ -1,5 +1,6 @@
 ## TODO
 - [x] List stations
-- [ ] Departure times
+- [x] Departure times
 - [ ] Sort stations based on geolocation
 - [ ] Analytics
+- [ ] fastclick
