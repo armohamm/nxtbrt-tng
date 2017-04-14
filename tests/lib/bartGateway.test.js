@@ -25,7 +25,8 @@ describe('bartGateway', function () {
       expect(requestedUrl).toHaveProperty('host','api.bart.gov');
       expect(requestedUrl).toHaveProperty('pathname','/api/etd.aspx');
 
-      const query = querystring.parse(requestedUrl.query);
+      // need the Object.assign so that we get an object with a prototype so that `toHaveProperty` works (it calls `hasOwnProperty`).
+      const query = Object.assign({},querystring.parse(requestedUrl.query));
       expect(query).toHaveProperty('cmd','etd');
       expect(query).toHaveProperty('key');
       expect(query).toHaveProperty('orig',fakeStation.abbr);
