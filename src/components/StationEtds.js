@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import {fetchEtds} from '../lib/bartGateway';
+import Estimate from './Estimate';
 
 export default class StationEtds extends Component{
   constructor(){
@@ -49,15 +50,5 @@ function Body({etds}){
 function Loading(){
   return (
     <div className="loading__spinner"/>
-  );
-}
-
-function Estimate({etd}){
-  const label = `${etd.dest.name}: ${etd.minutes}`;
-  const className = `etds-list__etd -line-${etd.lineColor}`;
-  return (
-    <li className={className}>
-      {label}
-    </li>
   );
 }

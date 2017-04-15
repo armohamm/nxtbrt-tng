@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "react-scripts": "0.9.5",
+    "react-test-renderer": "^15.5.4",
     "s3-website": "^3.0.1"
   },
   "scripts": {
