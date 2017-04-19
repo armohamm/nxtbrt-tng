@@ -11,7 +11,7 @@ export default class StationEtds extends Component{
   }
 
   componentWillMount(){
-    fetchEtds(this.props.station)
+    this.fetchEtds()
       .then( (etds)=> {
         this.setState({ etds });
       })
@@ -31,6 +31,11 @@ export default class StationEtds extends Component{
         </div>
       </section>
     );
+  }
+
+  fetchEtds(){
+    // TODO
+    return Promise.reject('slime');
   }
 }
 

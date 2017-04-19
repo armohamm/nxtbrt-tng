@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 export default function Station({station}){
@@ -14,4 +15,3 @@ export default function Station({station}){
 Station.propTypes = {
   station: PropTypes.object.isRequired
 }
-
