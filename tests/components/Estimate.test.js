@@ -1,23 +1,16 @@
 import React from 'react';
-import ReactShallowRenderer from 'react-test-renderer/shallow';
+import {shallow} from 'enzyme';
 
 import Estimate from '../../src/components/Estimate';
-
-
-function render(component){
-  const renderer = new ReactShallowRenderer();
-  renderer.render(component);
-  return renderer.getRenderOutput();
-}
 
 describe('Estimate', function () {
   test('has correct class names', function () {
     const etd = createEtd({
       lineColor: 'some-color'
     });
-    const result = render(<Estimate etd={etd}/>);
-    expect(result.props.className).toMatch('etds-list__etd');
-    expect(result.props.className).toMatch('-line-some-color');
+    const result = shallow(<Estimate etd={etd}/>);
+    expect(result).toHaveClassName('etds-list__etd');
+    expect(result).toHaveClassName('-line-some-color');
   });
 
 
@@ -29,8 +22,8 @@ describe('Estimate', function () {
           name: 'Morden'
         }
       });
-      const result = render(<Estimate etd={etd}/>);
-      expect(result.props.children).toBe('Morden: 2 mins');
+      const result = shallow(<Estimate etd={etd}/>);
+      expect(result).toHaveText('Morden: 2 mins');
     });
 
     test('1 min', function () {
@@ -40,8 +33,8 @@ describe('Estimate', function () {
           name: 'Morden'
         }
       });
-      const result = render(<Estimate etd={etd}/>);
-      expect(result.props.children).toBe('Morden: 1 min');
+      const result = shallow(<Estimate etd={etd}/>);
+      expect(result).toHaveText('Morden: 1 min');
     });
 
     test('now', function () {
@@ -51,8 +44,8 @@ describe('Estimate', function () {
           name: 'Morden'
         }
       });
-      const result = render(<Estimate etd={etd}/>);
-      expect(result.props.children).toBe('Morden: now');
+      const result = shallow(<Estimate etd={etd}/>);
+      expect(result).toHaveText('Morden: now');
     });
   });
 });

@@ -23,9 +23,7 @@ export default class StationEtds extends Component{
   render(){
     return (
       <section className="station-screen">
-        <Link to="/" className="station-screen__title">
-          {this.props.station.name}
-        </Link>
+        <Header station={this.props.station}/>
         <div className="station-screen__body">
           <Body etds={this.state.etds}/>
         </div>
@@ -34,12 +32,20 @@ export default class StationEtds extends Component{
   }
 
   fetchEtds(){
-    // TODO
-    return Promise.reject('slime');
+    const fetcher = this.props.etdFetcher || fetchEtds;
+    return fetcher(this.props.station);
   }
 }
 
-function Body({etds}){
+export function Header({station}){
+  return (
+    <Link to="/" className="station-screen__title">
+      {station.name}
+    </Link>
+  );
+}
+
+export function Body({etds}){
   if( !etds ){
     return <Loading/>;
   }

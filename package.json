@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "fetch-mock": "^5.9.4",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-router-dom": "^4.0.0"
+    "react-router-dom": "^4.1.1"
   },
   "devDependencies": {
     "enzyme": "^2.8.2",
-    "jest-enzyme": "^3.0.1",
+    "fetch-mock": "^5.10.0",
+    "jest-enzyme": "^2.1.2",
     "react-scripts": "0.9.5",
     "react-test-renderer": "^15.5.4",
     "s3-website": "^3.0.1"
