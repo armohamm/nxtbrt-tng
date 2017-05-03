@@ -1,43 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 
-import {fetchEtds} from '../lib/bartGateway';
 import Estimate from './Estimate';
 
-export default class StationEtds extends Component{
-  constructor(){
-    super();
-    this.state = {etds:false};
-  }
-
-  componentWillMount(){
-    this.fetchEtds()
-      .then( (etds)=> {
-        this.setState({ etds });
-      })
-      .catch( function(err){
-        console.error(err); // TODO: handle catch
-      });
-  }
-
-  render(){
-    return (
-      <section className="station-screen">
-        <Header station={this.props.station}/>
-        <div className="station-screen__body">
-          <Body etds={this.state.etds}/>
-        </div>
-      </section>
-    );
-  }
-
-  fetchEtds(){
-    const fetcher = this.props.etdFetcher || fetchEtds;
-    return fetcher(this.props.station);
-  }
+export default function StationEtds({station,etds}){
+  return (
+    <section className="station-screen">
+      <Header station={station}/>
+      <div className="station-screen__body">
+        <Body etds={etds}/>
+      </div>
+    </section>
+  );
 }
 
-export function Header({station}){
+function Header({station}){
   return (
     <Link to="/" className="station-screen__title">
       {station.name}
@@ -45,7 +22,7 @@ export function Header({station}){
   );
 }
 
-export function Body({etds}){
+function Body({etds}){
   if( !etds ){
     return <Loading/>;
   }

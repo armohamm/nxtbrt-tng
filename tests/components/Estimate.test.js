@@ -2,6 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import Estimate from '../../src/components/Estimate';
+import createEtd from '../generators/etd';
 
 describe('Estimate', function () {
   test('has correct class names', function () {
@@ -49,16 +50,3 @@ describe('Estimate', function () {
     });
   });
 });
-
-function createEtd(overrides={}){
-  return Object.assign(
-    {
-      minutes: 10,
-      dest: {
-        name: 'blah'
-      },
-      lineColor: 'blah'
-    },
-    overrides
-  );
-}

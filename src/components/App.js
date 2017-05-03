@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 import Stations from './Stations';
-import StationEtds from './StationEtds';
+import StationScreen from './StationScreen';
 
 import * as stationsRepo from '../lib/stationsRepo';
 import * as locationFeed from '../lib/locationFeed';
@@ -50,7 +50,7 @@ export default class App extends Component {
   renderEtdsRoute({match}){
     const station = stationsRepo.stationByAbbr(match.params.abbr);
     return (
-      <StationEtds station={station}/>
+      <StationScreen station={station}/>
     );
   }
 
