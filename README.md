@@ -5,3 +5,7 @@
 - [ ] Sort stations based on geolocation
 - [ ] Display network errors in a toast or similar
 - [ ] Analytics
+
+- Test coverage
+  - [ ] App component
+  - [ ] Station component
