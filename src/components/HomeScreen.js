@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Station from './Station';
 
-export default function Stations({stations}){
+export default function HomeScreen({stations}){
   const listItems = stations.map( (station,ix) => <Station key={ix} station={station} /> );
   return (
     <ul className="station-list">
@@ -12,7 +12,7 @@ export default function Stations({stations}){
   );
 }
 
-Stations.propTypes = {
+HomeScreen.propTypes = {
   stations: PropTypes.array.isRequired
 }
 

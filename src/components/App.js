@@ -4,7 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 
-import Stations from './Stations';
+import HomeScreen from './HomeScreen';
 import StationScreen from './StationScreen';
 
 import * as stationsRepo from '../lib/stationsRepo';
@@ -13,8 +13,8 @@ import * as locationFeed from '../lib/locationFeed';
 export default class App extends Component {
   constructor(){
     super();
-    this.renderStationsRoute = this.renderStationsRoute.bind(this);
-    this.renderEtdsRoute = this.renderEtdsRoute.bind(this);
+    this.renderHomeRoute = this.renderHomeRoute.bind(this);
+    this.renderStationRoute = this.renderStationRoute.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
 
     this.state = {
@@ -31,23 +31,23 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-          <Route path="/" exact render={this.renderStationsRoute} />
-          <Route path="/s/:abbr" render={this.renderEtdsRoute} />
+          <Route path="/" exact render={this.renderHomeRoute} />
+          <Route path="/s/:abbr" render={this.renderStationRoute} />
         </div>
       </Router>
     );
   }
 
-  renderStationsRoute(){
+  renderHomeRoute(){
     return (
-      <Stations 
+      <HomeScreen 
         stations={stationsRepo.allStations()} 
         currLocation={this.state.currLocation}
       />
     );
   }
 
-  renderEtdsRoute({match}){
+  renderStationRoute({match}){
     const station = stationsRepo.stationByAbbr(match.params.abbr);
     return (
       <StationScreen station={station}/>

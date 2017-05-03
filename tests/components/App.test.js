@@ -14,7 +14,7 @@ describe('App', function () {
         return node.prop('path') === '/';
       });
 
-      const stations = rootRoute.find('Stations');
+      const stations = rootRoute.find('HomeScreen');
 
       expect(stations).toBePresent();
       expect(stations).toHaveProp('stations');
@@ -37,7 +37,7 @@ describe('App', function () {
         locationFeedSubscribe={fakeLocationSubscribe}
       />);
 
-      const stationsComponent = appComponent.find('Stations');
+      const stationsComponent = appComponent.find('HomeScreen');
       expect(stationsComponent).toBePresent();
 
       expect(stationsComponent).toHaveProp('currLocation',false);
