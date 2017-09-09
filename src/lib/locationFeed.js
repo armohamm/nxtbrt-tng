@@ -1,7 +1,31 @@
-export function locationFeedSubscribe(onLocationChange, geolocation = navigator.geolocation){
+export function locationFeedSubscribe(
+  onLocationChange, 
+  {
+    geolocation = navigator.geolocation,
+    console = window.console
+  }={}
+){
+  const watchId = geolocation.watchPosition(
+    handleLocationSuccess,
+    handleLocationFailure,
+    {
+      maximumAge: 300000
+    }
+  );
 
-  console.log('subscribing to location feed');
-  // I AM HERE
-  //geolocation.watchPosition();
-  
+  function handleLocationSuccess(position){
+    onLocationChange(position);
+    if( position.coords.accuracy <= 500 ){ // 500 meters
+      stopWatching();
+    }
+  }
+
+  function handleLocationFailure(positionError){
+    console.error('GELOCATION ERROR:',positionError);
+    stopWatching();
+  }
+
+  function stopWatching(){
+    geolocation.clearWatch(watchId);
+  }
 }
