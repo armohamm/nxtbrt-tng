@@ -15,7 +15,7 @@ export default class App extends Component {
     super();
     this.renderHomeRoute = this.renderHomeRoute.bind(this);
     this.renderStationRoute = this.renderStationRoute.bind(this);
-    this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.handlePositionChange = this.handlePositionChange.bind(this);
 
     this.state = {
       currLocation: false
@@ -24,7 +24,7 @@ export default class App extends Component {
 
   componentWillMount(){
     const locationFeedSubscribe = this.props.locationFeedSubscribe || locationFeed.locationFeedSubscribe;
-    locationFeedSubscribe(this.handleLocationChange);
+    locationFeedSubscribe(this.handlePositionChange);
   }
 
   render(){
@@ -39,23 +39,33 @@ export default class App extends Component {
   }
 
   renderHomeRoute(){
+    const stations = 
+      this.state.currLocation ?
+        this.props.stationsRepo.allStationsSortedByProximity(this.state.currLocation)
+      :
+        this.props.stationsRepo.allStations();
+
     return (
       <HomeScreen 
-        stations={stationsRepo.allStations()} 
+        stations={stations} 
         currLocation={this.state.currLocation}
       />
     );
   }
 
   renderStationRoute({match}){
-    const station = stationsRepo.stationByAbbr(match.params.abbr);
+    const station = this.props.stationsRepo.stationByAbbr(match.params.abbr);
     return (
       <StationScreen station={station}/>
     );
   }
 
-  handleLocationChange(newLocation){
-    this.setState({currLocation:newLocation});
+  handlePositionChange(newPosition){
+    this.setState({currLocation:newPosition.coords});
   }
+}
+
+App.defaultProps = {
+  stationsRepo
 }
 

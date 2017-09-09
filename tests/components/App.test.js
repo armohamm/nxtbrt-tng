@@ -5,9 +5,15 @@ import App from '../../src/components/App';
 
 describe('App', function () {
   describe('route /', function () {
-    it('renders Stations',function () {
+    it('renders HomeScreen',function () {
+      const fakeStations = [{},{},{},{}]
+      const fakeStationsRepo = {
+        allStations(){ return fakeStations; }
+      };
+
       const appComponent = mount(<App
         locationFeedSubscribe={dummyLocationSubscribe}
+        stationsRepo={fakeStationsRepo}
       />);
 
       const rootRoute = appComponent.find('Route').filterWhere(function (node) {
@@ -15,9 +21,7 @@ describe('App', function () {
       });
 
       const stations = rootRoute.find('HomeScreen');
-
       expect(stations).toBePresent();
-      expect(stations).toHaveProp('stations');
     });
   });
 
@@ -27,22 +31,34 @@ describe('App', function () {
   });
 
   describe('geolocation', function () {
-    it('updates stations list with location when it changes', function () {
+    it('shows station list sorted by proximity, iff location is availabe', () => {
       let locationCallback;
       function fakeLocationSubscribe(onLocationChange){
         locationCallback = onLocationChange;
       }
 
+      const unsortedStations = [{},{},{}];
+      const sortedStations = [{},{}];
+
+      const fakeStationsRepo = {
+        allStations(){ return unsortedStations; },
+        allStationsSortedByProximity(){ return sortedStations; }
+      };
+
       const appComponent = mount(<App
         locationFeedSubscribe={fakeLocationSubscribe}
+        stationsRepo={fakeStationsRepo}
       />);
 
       const stationsComponent = appComponent.find('HomeScreen');
       expect(stationsComponent).toBePresent();
 
-      expect(stationsComponent).toHaveProp('currLocation',false);
-      locationCallback('some-new-location');
-      expect(stationsComponent).toHaveProp('currLocation','some-new-location');
+      expect(stationsComponent).toHaveProp('stations',unsortedStations);
+
+      const fakePosition = {coords:{}};
+      locationCallback(fakePosition);
+
+      expect(stationsComponent).toHaveProp('stations',sortedStations);
     });
   });
 });

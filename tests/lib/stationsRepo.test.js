@@ -8,9 +8,24 @@ describe('stationsRepo', function () {
       stations.forEach( function(station){
         expect(station).toHaveProperty('name');
         expect(station).toHaveProperty('abbr');
-        expect(station).toHaveProperty('lat');
-        expect(station).toHaveProperty('long');
+        expect(station).toHaveProperty('latitude');
+        expect(station).toHaveProperty('longitude');
       });
+    });
+  });
+
+  describe('allStationsSortedByProximity', () => {
+    it('returns a correctly sorted array of stations', () => {
+      const coords = {
+        latitude: 37.8411,
+        longitude: -122.2749
+      };
+      const stations = stationsRepo.allStationsSortedByProximity(coords);
+      expect(stations).toHaveLength( stationsRepo.allStations().length );
+      expect(stations[0].abbr).toEqual('ASHB');
+      expect(stations[1].abbr).toEqual('MCAR');
+      expect(stations[2].abbr).toEqual('ROCK');
+      expect(stations[3].abbr).toEqual('DBRK');
     });
   });
 
@@ -25,8 +40,8 @@ describe('stationsRepo', function () {
       expect(station).toBeDefined();
       expect(station).toHaveProperty('abbr','WOAK');
       expect(station).toHaveProperty('name','West Oakland');
-      expect(station).toHaveProperty('lat');
-      expect(station).toHaveProperty('long');
+      expect(station).toHaveProperty('latitude');
+      expect(station).toHaveProperty('longitude');
     });
 
     test('abbr is case insensitive', function () {
