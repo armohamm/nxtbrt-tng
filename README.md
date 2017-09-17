@@ -6,7 +6,8 @@
 - [ ] Display network errors in a toast or similar
 - [ ] Display geolocation in a toast or similar
 - [ ] Analytics
-- [ ] show BART map in landscape mode
+- [x] show BART map in landscape mode
+- [ ] only show BART map on mobile devices
 
 - Test coverage
   - [ ] App component
