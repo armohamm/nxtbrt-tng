@@ -5,10 +5,12 @@ import {
 } from 'react-router-dom';
 
 import HomeScreen from './HomeScreen';
+import SystemMap from './SystemMap';
 import StationScreen from './StationScreen';
 
 import * as stationsRepo from '../lib/stationsRepo';
 import * as locationFeed from '../lib/locationFeed';
+import {orientationFeedSubscribe} from '../lib/orientationFeed';
 
 export default class App extends Component {
   constructor(){
@@ -16,6 +18,7 @@ export default class App extends Component {
     this.renderHomeRoute = this.renderHomeRoute.bind(this);
     this.renderStationRoute = this.renderStationRoute.bind(this);
     this.handlePositionChange = this.handlePositionChange.bind(this);
+    this.handleOrientationChange = this.handleOrientationChange.bind(this);
 
     this.state = {
       currLocation: false
@@ -25,9 +28,15 @@ export default class App extends Component {
   componentWillMount(){
     const locationFeedSubscribe = this.props.locationFeedSubscribe || locationFeed.locationFeedSubscribe;
     locationFeedSubscribe(this.handlePositionChange);
+    
+    this.props.orientationFeedSubscribe(this.handleOrientationChange);
   }
 
   render(){
+    if( this.state.deviceOrientation === 'landscape' ){
+      return <SystemMap />;
+    }
+
     return (
       <Router>
         <div>
@@ -63,9 +72,15 @@ export default class App extends Component {
   handlePositionChange(newPosition){
     this.setState({currLocation:newPosition.coords});
   }
+
+  handleOrientationChange(newOrientationType){
+    const deviceOrientation = newOrientationType.split('-')[0];
+    this.setState({deviceOrientation});
+  }
 }
 
 App.defaultProps = {
-  stationsRepo
+  stationsRepo,
+  orientationFeedSubscribe
 }
 

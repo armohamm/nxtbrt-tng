@@ -13,6 +13,7 @@ describe('App', function () {
 
       const appComponent = mount(<App
         locationFeedSubscribe={dummyLocationSubscribe}
+        orientationFeedSubscribe={dummyOrientationSubscribe}
         stationsRepo={fakeStationsRepo}
       />);
 
@@ -47,6 +48,7 @@ describe('App', function () {
 
       const appComponent = mount(<App
         locationFeedSubscribe={fakeLocationSubscribe}
+        orientationFeedSubscribe={dummyOrientationSubscribe}
         stationsRepo={fakeStationsRepo}
       />);
 
@@ -61,7 +63,48 @@ describe('App', function () {
       expect(stationsComponent).toHaveProp('stations',sortedStations);
     });
   });
+
+  describe('orientation', () => {
+    it('renders regular app when orientation is portrait', () => {
+      let orientationCallback;
+      function fakeOrientationFeedSubscribe(onOrientationChange){
+        orientationCallback = onOrientationChange;
+      }
+      const appComponent = mount(<App
+        orientationFeedSubscribe={fakeOrientationFeedSubscribe}
+        locationFeedSubscribe={dummyLocationSubscribe}
+      />);
+
+      expect(appComponent.find('HomeScreen')).toBePresent();
+      expect(appComponent.find('SystemMap')).not.toBePresent();
+
+      orientationCallback('portrait-primary');
+
+      expect(appComponent.find('HomeScreen')).toBePresent();
+      expect(appComponent.find('SystemMap')).not.toBePresent();
+    });
+
+    it('displays system map when orientation is landscape', () => {
+      let orientationCallback;
+      function fakeOrientationFeedSubscribe(onOrientationChange){
+        orientationCallback = onOrientationChange;
+      }
+      const appComponent = mount(<App
+        orientationFeedSubscribe={fakeOrientationFeedSubscribe}
+        locationFeedSubscribe={dummyLocationSubscribe}
+      />);
+
+      orientationCallback('landscape-secondary');
+
+      expect(appComponent.find('HomeScreen')).not.toBePresent();
+      expect(appComponent.find('SystemMap')).toBePresent();
+    });
+    
+  });
 });
 
 function dummyLocationSubscribe(){
+}
+
+function dummyOrientationSubscribe(){
 }

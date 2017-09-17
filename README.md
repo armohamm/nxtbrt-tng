@@ -4,8 +4,10 @@
 - [x] Show "now" rather than "0" for ETDs
 - [x] Sort stations based on geolocation
 - [ ] Display network errors in a toast or similar
-- [ ] Display ggeolocation in a toast or similar
+- [ ] Display geolocation in a toast or similar
 - [ ] Analytics
+- [x] show BART map in landscape mode
+- [ ] only show BART map on mobile devices
 
 - Test coverage
   - [ ] App component
