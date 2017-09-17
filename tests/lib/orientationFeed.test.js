@@ -11,7 +11,20 @@ describe('orientationFeed', () => {
     expect(spyOrientation.addEventListener).toHaveBeenCalledWith('change',expect.anything());
   });
 
-  it('calls handler with orientation', () => {
+  it('calls handler with the initial orientation type', () => {
+    const fakeOrientation = {
+      addEventListener(){},
+      type: 'initial orientation type'
+    };
+
+    const spyHandler = jest.fn();
+
+    orientationFeedSubscribe(spyHandler,{orientation:fakeOrientation});
+
+    expect(spyHandler).toHaveBeenCalledWith('initial orientation type');
+  });
+
+  it('calls handler with new orientation type when orientation changes', () => {
     const spyOrientation = {
       addEventListener: jest.fn()
     };
@@ -23,12 +36,17 @@ describe('orientationFeed', () => {
     const internalHandler = spyOrientation.addEventListener.mock.calls[0][1];
     expect(internalHandler).toBeDefined();
 
-    except(spyHandler).not.toHaveBeenCalled();
+    const fakeOrientationEvent = {
+      target: {
+        type: 'fake orientation type'
+      }
+    };
 
     internalHandler(fakeOrientationEvent);
 
-    except(spyHandler).toHaveBeenCalled();
+    expect(spyHandler).toHaveBeenCalledWith('fake orientation type');
   });
+
 });
 
 function dummyHandler(){

@@ -9,6 +9,7 @@ import StationScreen from './StationScreen';
 
 import * as stationsRepo from '../lib/stationsRepo';
 import * as locationFeed from '../lib/locationFeed';
+import {orientationFeedSubscribe} from '../lib/orientationFeed';
 
 export default class App extends Component {
   constructor(){
@@ -25,6 +26,11 @@ export default class App extends Component {
   componentWillMount(){
     const locationFeedSubscribe = this.props.locationFeedSubscribe || locationFeed.locationFeedSubscribe;
     locationFeedSubscribe(this.handlePositionChange);
+    
+    // FIXME: temp
+    orientationFeedSubscribe(function () {
+      debugger
+    });
   }
 
   render(){
