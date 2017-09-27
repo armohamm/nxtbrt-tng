@@ -8,4 +8,5 @@ workshop:
 awsdeployment:
   image: codeship/aws-deployment
   volumes:
+    - ./:/usr/src/app
     - ./tmp/artifacts:/artifacts
