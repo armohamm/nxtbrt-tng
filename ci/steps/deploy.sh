@@ -1,10 +1,12 @@
 #!/bin/sh
 set -e -u
 
-if [ -z ${DEPLOY_TARGET+x} ]; then 
-  echo "DEPLOY_TARGET is required"
+if [ -z ${1+x} ]; then 
+  echo "a deploy target must be specified (e.g. \`deploy.sh staging\`)"
   exit 1
 fi
+
+DEPLOY_TARGET="$1"
 
 echo "deploying to $DEPLOY_TARGET..."
 

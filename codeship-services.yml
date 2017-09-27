@@ -1,7 +1,5 @@
 workshop:
   image: node:alpine
-  environment:
-    CI: 1
   volumes:
     - ./:/usr/src/app
     - ./tmp/artifacts:/artifacts

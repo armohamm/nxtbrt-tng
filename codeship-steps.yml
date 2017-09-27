@@ -6,6 +6,6 @@
   service: workshop
   command: sh ./ci/steps/build.sh
   
-- name: deploy
+- name: deploy staging
   service: workshop
-  command: sh ./ci/steps/deploy.sh
+  command: sh ./ci/steps/deploy.sh staging
