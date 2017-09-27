@@ -5,3 +5,7 @@ workshop:
     - ./tmp/artifacts:/artifacts
   working_dir: /usr/src/app
 
+awsdeployment:
+  image: codeship/aws-deployment
+  volumes:
+    - ./tmp/artifacts:/artifacts

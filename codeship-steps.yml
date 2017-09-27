@@ -7,5 +7,5 @@
   command: sh ./ci/steps/build.sh
   
 - name: deploy staging
-  service: workshop
+  service: awsdeployment
   command: sh ./ci/steps/deploy.sh staging

@@ -8,6 +8,16 @@ fi
 
 DEPLOY_TARGET="$1"
 
-echo "deploying to $DEPLOY_TARGET..."
+
+apk add --no-cache tree
+
+echo "************************************"
+echo "* "
+echo "* deploying to $DEPLOY_TARGET..."
+echo "* "
+echo "************************************"
+
+cd /artifacts/build
+tree
 
 echo "TODO: actually deploy!"
