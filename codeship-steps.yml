@@ -1,3 +1,7 @@
+- name: env
+  service: workshop
+  command: env
+
 - name: test
   service: workshop
   command: sh ./ci/steps/test.sh
