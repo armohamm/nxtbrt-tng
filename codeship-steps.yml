@@ -4,12 +4,12 @@
 
 - name: test
   service: workshop
-  command: sh ./ci/steps/test.sh
+  command: sh ./codeship/steps/test.sh
   
 - name: build
   service: workshop
-  command: sh ./ci/steps/build.sh
+  command: sh ./codeship/steps/build.sh
   
 - name: deploy staging
   service: deployer
-  command: sh ./ci/steps/deploy.sh staging.nxtbrt.com
+  command: sh ./codeship/steps/deploy.sh staging.nxtbrt.com

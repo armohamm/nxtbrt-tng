@@ -8,6 +8,6 @@ workshop:
 deployer:
   image: codeship/aws-deployment
   volumes:
-    - ./ci:/ci
+    - ./codeship/steps:/codeship/steps
     - ./tmp/artifacts:/artifacts
   encrypted_env_file: codeship/deployer.env.encrypted
