@@ -5,8 +5,9 @@ workshop:
     - ./tmp/artifacts:/artifacts
   working_dir: /usr/src/app
 
-awsdeployment:
+deployer:
   image: codeship/aws-deployment
   volumes:
     - ./ci:/ci
     - ./tmp/artifacts:/artifacts
+  encrypted_env_file: codeship/deployer.env.encrypted

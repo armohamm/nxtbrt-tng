@@ -2,22 +2,22 @@
 set -e -u
 
 if [ -z ${1+x} ]; then 
-  echo "a deploy target must be specified (e.g. \`deploy.sh staging\`)"
+  echo "a target bucket must be specified (e.g. \`deploy.sh staging\`)"
   exit 1
 fi
 
-DEPLOY_TARGET="$1"
-
-
-apk add --no-cache tree
-
-echo "************************************"
-echo "* "
-echo "* deploying to $DEPLOY_TARGET..."
-echo "* "
-echo "************************************"
+TARGET_BUCKET="$1"
 
 cd /artifacts/build
-tree
 
-echo "TODO: actually deploy!"
+echo "*******************************************************"
+echo "* "
+echo "* deploying the following files to $TARGET_BUCKET..."
+echo "* "
+echo "*******************************************************"
+
+ls -lR
+
+aws s3 sync --acl public-read --delete . "s3://$TARGET_BUCKET/"
+
+echo "deployment complete"
