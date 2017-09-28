@@ -11,5 +11,11 @@
   command: sh ./codeship/steps/build.sh
   
 - name: deploy staging
+  tag: master
   service: deployer
   command: sh ./codeship/steps/deploy.sh staging.nxtbrt.com
+  
+- name: deploy prod
+  tag: 'MARKER/prod'
+  service: deployer
+  command: sh ./codeship/steps/deploy.sh www.nxtbrt.com
