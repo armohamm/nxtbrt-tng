@@ -1,0 +1,15 @@
+- name: env
+  service: workshop
+  command: env
+
+- name: test
+  service: workshop
+  command: sh ./codeship/steps/test.sh
+  
+- name: build
+  service: workshop
+  command: sh ./codeship/steps/build.sh
+  
+- name: deploy staging
+  service: deployer
+  command: sh ./codeship/steps/deploy.sh staging.nxtbrt.com

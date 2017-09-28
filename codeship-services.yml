@@ -1,0 +1,13 @@
+workshop:
+  image: node:alpine
+  volumes:
+    - ./:/usr/src/app
+    - ./tmp/artifacts:/artifacts
+  working_dir: /usr/src/app
+
+deployer:
+  image: codeship/aws-deployment
+  volumes:
+    - ./codeship/steps:/codeship/steps
+    - ./tmp/artifacts:/artifacts
+  encrypted_env_file: codeship/deployer.env.encrypted
