@@ -33,7 +33,8 @@ export default class App extends Component {
   }
 
   render(){
-    if( this.state.deviceOrientation === 'landscape' ){
+    // show map if we know for a fact that this is a landscape-orientated mobile device
+    if( this.state.deviceOrientation == 'landscape' ){
       return <SystemMap />;
     }
 

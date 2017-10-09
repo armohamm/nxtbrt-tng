@@ -65,6 +65,16 @@ describe('App', function () {
   });
 
   describe('orientation', () => {
+    it('renders regular app when orientation is un-reported (i.e. not a mobile device)', () => {
+      const appComponent = mount(<App
+        orientationFeedSubscribe={dummyOrientationSubscribe}
+        locationFeedSubscribe={dummyLocationSubscribe}
+      />);
+
+      expect(appComponent.find('HomeScreen')).toBePresent();
+      expect(appComponent.find('SystemMap')).not.toBePresent();
+    });
+
     it('renders regular app when orientation is portrait', () => {
       let orientationCallback;
       function fakeOrientationFeedSubscribe(onOrientationChange){
@@ -74,9 +84,6 @@ describe('App', function () {
         orientationFeedSubscribe={fakeOrientationFeedSubscribe}
         locationFeedSubscribe={dummyLocationSubscribe}
       />);
-
-      expect(appComponent.find('HomeScreen')).toBePresent();
-      expect(appComponent.find('SystemMap')).not.toBePresent();
 
       orientationCallback('portrait-primary');
 
