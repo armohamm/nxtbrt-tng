@@ -1,16 +1,24 @@
 import o9n from 'o9n';
+import _detectGyro from './detectGyro';
 
 export function orientationFeedSubscribe(
   onOrientationChange,
-  {orientation=o9n.orientation} = {}
+  {
+    orientation=o9n.orientation,
+    detectGyro=_detectGyro
+  } = {}
 ){
-  orientation.addEventListener('change',handleChange);
+  let appearsToBeMobileDevice = undefined;
+  detectGyro(function(hasGyro){
+    appearsToBeMobileDevice = hasGyro;
+    whenOrientationChanges();
+  });
 
-  function handleChange(ev){
-    const orientationType = ev.target.type;
-    onOrientationChange(orientationType);
+  orientation.addEventListener('change', whenOrientationChanges);
+
+  function whenOrientationChanges(){
+    if( appearsToBeMobileDevice ){
+      onOrientationChange(orientation.type);
+    }
   }
-
-  const initialOrientationType = orientation.type;
-  onOrientationChange(initialOrientationType);
 }
