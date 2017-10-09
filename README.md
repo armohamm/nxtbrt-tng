@@ -9,7 +9,7 @@ Test > Build > Deploy pipeline: [ ![Codeship Status for moredip/nxtbrt-tng](http
 - [ ] Display geolocation in a toast or similar
 - [ ] Analytics
 - [x] show BART map in landscape mode
-- [ ] only show BART map on mobile devices
+- [x] only show BART map on mobile devices
 
 - Test coverage
   - [ ] App component
