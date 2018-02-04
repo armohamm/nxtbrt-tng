@@ -6,6 +6,7 @@
     "haversine": "^1.0.2",
     "o9n": "^2.0.1",
     "prop-types": "^15.5.8",
+    "raven-js": "3.22.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1"
