@@ -4,6 +4,9 @@ Test > Build > Deploy pipeline: [ ![Codeship Status for moredip/nxtbrt-tng](http
 Master branch is continuously deployed to [staging](http://staging.nxtbrt.com.s3-website-us-west-2.amazonaws.com/#/).
 MARKER/prod is deployed to [nxtbrt.com](https://nxtbrt.com)
 
+## Notes
+- src/lib/raw_stn.json comes from https://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y
+
 ## TODO
 - [x] List stations
 - [x] Departure times
