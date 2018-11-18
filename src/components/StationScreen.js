@@ -12,12 +12,9 @@ export default class StationScreenContainer extends Component{
   }
 
   componentWillMount(){
-    this.fetchEtds()
+    return this.fetchEtds()
       .then( (etds)=> {
         this.setState({ etds });
-      })
-      .catch( function(err){
-        console.error(err); // TODO: handle catch
       });
   }
 
