@@ -29,7 +29,6 @@ describe('orientationFeed', () => {
     expect(spyHandler).toHaveBeenCalledWith('3rd-orientation');
   });
 
-
   it('never calls handler if it determines that the device has no gyro', () => {
     const spyDetectGyro = createDetectGyroSpy();
     const fakeOrientation = createFakeOrientation();
@@ -53,6 +52,32 @@ describe('orientationFeed', () => {
     fakeOrientation.simulateOrientationChange('2nd-orientation');
     expect(spyHandler).not.toHaveBeenCalled();
   });
+
+  it('pushes a GTM event once gyro availablity is detected', () => {
+    const spyDetectGyro = createDetectGyroSpy();
+    const spyGtm = {
+      pushEvent: jest.fn()
+    };
+
+    orientationFeedSubscribe(dummyHandler,{detectGyro:spyDetectGyro.spy,gtm:spyGtm});
+
+    spyDetectGyro.simulateGyroDetection(false);
+
+    expect(spyGtm.pushEvent).toHaveBeenCalledWith('gyro-detection',{hasGyro:false});
+  });
+
+  it('pushes a GTM event when orientation changes', () => {
+    const spyGtm = {
+      pushEvent: jest.fn()
+    };
+    const fakeOrientation = createFakeOrientation();
+
+    orientationFeedSubscribe(dummyHandler,{orientation:fakeOrientation.fake,gtm:spyGtm});
+
+    fakeOrientation.simulateOrientationChange('new-orientation');
+    expect(spyGtm.pushEvent).toHaveBeenCalledWith('orientation-change',{orientation:'new-orientation'});
+  });
+
 });
 
 function createDetectGyroSpy(){
