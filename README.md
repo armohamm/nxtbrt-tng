@@ -14,7 +14,7 @@ MARKER/prod is deployed to [nxtbrt.com](https://nxtbrt.com)
 - [x] Sort stations based on geolocation
 - [ ] Display network errors in a toast or similar
 - [ ] Display geolocation in a toast or similar
-- [ ] Analytics
+- [x] Analytics
 - [x] show BART map in landscape mode
 - [x] only show BART map on mobile devices
 
