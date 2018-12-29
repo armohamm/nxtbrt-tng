@@ -18,6 +18,6 @@ echo "*******************************************************"
 
 ls -lR
 
-aws s3 sync --acl public-read --delete . "s3://$TARGET_BUCKET/"
+aws s3 sync --acl public-read . "s3://$TARGET_BUCKET/"
 
 echo "deployment complete"
