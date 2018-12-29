@@ -50,4 +50,11 @@ describe('stationsRepo', function () {
       expect(station).toHaveProperty('abbr','WOAK');
     });
   });
+
+
+  test('some station names are abbreviated (to better fit mobile display)', function () {
+    const sfoStation = stationsRepo.stationByAbbr('SFIA');
+    expect(sfoStation).toBeDefined();
+    expect(sfoStation).toHaveProperty('name','San Francisco Intl. Airport');
+  });
 });
